@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#090a0f"/>
+    </linearGradient>
+    <linearGradient id="primary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded card -->
+  <rect width="512" height="512" rx="128" fill="url(#bg)"/>
+  <rect x="8" y="8" width="496" height="496" rx="120" fill="none" stroke="url(#primary)" stroke-width="6" opacity="0.4"/>
+
+  <!-- Stylized Dumbbell / Pulse Symbol -->
+  <g transform="translate(106, 106) scale(0.585)">
+    <!-- Left Plate Outer -->
+    <rect x="40" y="160" width="40" height="192" rx="16" fill="url(#primary)"/>
+    <!-- Left Plate Inner -->
+    <rect x="100" y="120" width="40" height="272" rx="16" fill="url(#primary)"/>
+    <!-- Left Collar -->
+    <rect x="160" y="210" width="24" height="92" rx="8" fill="#e2e8f0"/>
+
+    <!-- Bar Center -->
+    <rect x="184" y="232" width="144" height="48" rx="10" fill="#94a3b8"/>
+    <!-- Knurling texture on bar -->
+    <line x1="220" y1="236" x2="220" y2="276" stroke="#475569" stroke-width="4"/>
+    <line x1="240" y1="236" x2="240" y2="276" stroke="#475569" stroke-width="4"/>
+    <line x1="260" y1="236" x2="260" y2="276" stroke="#475569" stroke-width="4"/>
+    <line x1="280" y1="236" x2="280" y2="276" stroke="#475569" stroke-width="4"/>
+
+    <!-- Right Collar -->
+    <rect x="328" y="210" width="24" height="92" rx="8" fill="#e2e8f0"/>
+    <!-- Right Plate Inner -->
+    <rect x="372" y="120" width="40" height="272" rx="16" fill="url(#primary)"/>
+    <!-- Right Plate Outer -->
+    <rect x="432" y="160" width="40" height="192" rx="16" fill="url(#primary)"/>
+
+    <!-- Dynamic Energy Arc / Progress Ring -->
+    <path d="M 120 80 A 180 180 0 0 1 400 80" fill="none" stroke="url(#accent)" stroke-width="24" stroke-linecap="round"/>
+    <circle cx="400" cy="80" r="14" fill="#10b981"/>
+  </g>
+</svg>
