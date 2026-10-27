@@ -19,7 +19,7 @@
 | Exercício | Séries x Repetições | Demonstração | Observação |
 |---|---|---|---|
 | Supino Reto com Barra | 4 x 8-10 | [![Supino](https://img.shields.io/badge/🎥_Ver_GIF-blue)](https://www.youtube.com/results?search_query=gif+supino+reto+com+barra) | Focar na contração excêntrica (descida controlada). |
-| Voador (Peck Deck na Estação) | 4 x 10-12 | [![Voador](https://img.shields.io/badge/🎥_Ver_GIF-blue)](https://www.youtube.com/results?search_query=gif+peck+deck+machine) | Aperte o peitoral no pico de contração. |
+| Crucifixo com Halteres (Reto ou Inclinado) | 4 x 10-12 | [![Crucifixo](https://img.shields.io/badge/🎥_Ver_GIF-blue)](https://www.youtube.com/results?search_query=gif+crucifixo+com+halteres) | Manter os cotovelos levemente flexionados durante todo o arco do movimento e focar no alongamento do peitoral. |
 | Desenvolvimento com Halteres | 3 x 8-10 | [![Desenvolvimento](https://img.shields.io/badge/🎥_Ver_GIF-blue)](https://www.youtube.com/results?search_query=gif+desenvolvimento+halteres) | Realizar sentado no banco com as costas apoiadas. |
 | Elevação Lateral com Halteres | 3 x 12-15 | [![Elevacao](https://img.shields.io/badge/🎥_Ver_GIF-blue)](https://www.youtube.com/results?search_query=gif+elevacao+lateral+halteres) | Movimento contínuo, sem roubar com o tronco. |
 | Tríceps na Polia com Corda | 4 x 10-12 | [![Triceps](https://img.shields.io/badge/🎥_Ver_GIF-blue)](https://www.youtube.com/results?search_query=gif+triceps+corda+polia) | Estenda totalmente o cotovelo no final do movimento. |
