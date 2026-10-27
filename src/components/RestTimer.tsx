@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { Play, Pause, RotateCcw, Plus, X, Bell } from 'lucide-react'
+import { useTheme } from '../context/useTheme'
 
 interface RestTimerProps {
   initialSeconds: number
@@ -26,6 +27,8 @@ function RestTimerActive({
   initialSeconds: number
   onClose: () => void
 }) {
+  const theme = useTheme()
+
   const [totalSeconds, setTotalSeconds] = useState(initialSeconds)
   const [remainingSeconds, setRemainingSeconds] = useState(initialSeconds)
   const [isRunning, setIsRunning] = useState(true)
@@ -101,7 +104,7 @@ function RestTimerActive({
         <div className="absolute top-0 left-0 right-0 h-1 bg-slate-800 rounded-t-2xl overflow-hidden">
           <div
             className={`h-full transition-all duration-300 ${
-              isFinished ? 'bg-emerald-400' : 'bg-cyan-400'
+              isFinished ? 'bg-emerald-400' : theme.timerProgress
             }`}
             style={{ width: `${progressPercent}%` }}
           />
@@ -111,8 +114,8 @@ function RestTimerActive({
           {/* Timer Display */}
           <div className="flex items-center gap-3">
             <div
-              className={`p-2 rounded-xl ${
-                isFinished ? 'bg-emerald-500/20 text-emerald-400' : 'bg-cyan-500/10 text-cyan-400'
+              className={`p-2 rounded-xl transition-colors duration-200 ${
+                isFinished ? 'bg-emerald-500/20 text-emerald-400' : theme.badge
               }`}
             >
               <Bell className="w-5 h-5" />
@@ -140,10 +143,8 @@ function RestTimerActive({
 
             <button
               onClick={() => setIsRunning(!isRunning)}
-              className={`p-2.5 rounded-xl font-bold transition-transform active:scale-95 ${
-                isRunning
-                  ? 'bg-amber-500 text-slate-950'
-                  : 'bg-cyan-500 text-slate-950 hover:bg-cyan-400'
+              className={`p-2.5 rounded-xl font-bold transition-all active:scale-95 ${
+                isRunning ? 'bg-amber-500 text-slate-950' : theme.timerBg
               }`}
               title={isRunning ? 'Pausar' : 'Continuar'}
             >

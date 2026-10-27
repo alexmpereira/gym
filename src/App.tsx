@@ -16,9 +16,21 @@ import { DemoModal } from './components/DemoModal'
 import { HistoryModal } from './components/HistoryModal'
 import { EquipmentModal } from './components/EquipmentModal'
 import { WorkoutSummaryModal } from './components/WorkoutSummaryModal'
+import { ThemeProvider } from './context/ThemeContext'
+import { useTheme } from './context/useTheme'
 import type { Exercise } from './types/workout'
 
 export default function App() {
+  const tracker = useWorkoutTracker()
+
+  return (
+    <ThemeProvider activeProfileId={tracker.activeProfileId}>
+      <MainApp tracker={tracker} />
+    </ThemeProvider>
+  )
+}
+
+function MainApp({ tracker }: { tracker: ReturnType<typeof useWorkoutTracker> }) {
   const {
     profiles,
     activeProfileId,
@@ -37,7 +49,9 @@ export default function App() {
     profileStatsByDay,
     progressPercentage,
     logs,
-  } = useWorkoutTracker()
+  } = tracker
+
+  const theme = useTheme()
 
   // Modal states
   const [selectedDemoExercise, setSelectedDemoExercise] = useState<Exercise | null>(null)
@@ -59,13 +73,13 @@ export default function App() {
   const handleCompleteWorkout = () => {
     completeWorkout()
 
-    // Trigger visual confetti celebration
+    // Trigger visual confetti celebration with profile-specific colors
     try {
       confetti({
         particleCount: 100,
         spread: 80,
         origin: { y: 0.6 },
-        colors: ['#06b6d4', '#10b981', '#f59e0b', '#3b82f6', '#ec4899'],
+        colors: theme.confettiColors,
       })
     } catch {
       // Ignored if canvas unsupported
@@ -75,7 +89,16 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#090a0f] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#090a0f] text-slate-100 flex flex-col font-sans relative overflow-x-hidden">
+      {/* Dynamic Ambient Background Glow */}
+      <div
+        className={`pointer-events-none fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 blur-3xl -z-10 transition-all duration-700 ${
+          theme.isRose
+            ? 'bg-gradient-to-b from-rose-500/15 via-pink-500/5 to-transparent'
+            : 'bg-gradient-to-b from-cyan-500/10 via-blue-500/5 to-transparent'
+        }`}
+      />
+
       {/* Top Sticky Header */}
       <Header
         profiles={profiles}
@@ -102,7 +125,9 @@ export default function App() {
           <div className="flex items-start justify-between gap-3">
             <div>
               <div className="flex items-center gap-2">
-                <span className="flex items-center justify-center w-7 h-7 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 text-xs font-black">
+                <span
+                  className={`flex items-center justify-center w-7 h-7 rounded-xl ${theme.badge} text-xs font-black transition-colors duration-200`}
+                >
                   {currentDay.letter}
                 </span>
                 <h2 id="current-workout-title" className="text-lg font-bold text-white tracking-tight">
@@ -131,7 +156,13 @@ export default function App() {
           <div className="space-y-1.5">
             <div className="flex items-center justify-between text-xs font-semibold">
               <span className="text-slate-400">Progresso da Ficha</span>
-              <span className={progressPercentage === 100 ? 'text-emerald-400' : 'text-cyan-400'}>
+              <span
+                className={
+                  progressPercentage === 100
+                    ? 'text-emerald-400'
+                    : `${theme.textAccent} transition-colors duration-200`
+                }
+              >
                 {progressPercentage}%
               </span>
             </div>
@@ -140,7 +171,7 @@ export default function App() {
                 className={`h-full transition-all duration-300 rounded-full ${
                   progressPercentage === 100
                     ? 'bg-gradient-to-r from-emerald-500 to-teal-400'
-                    : 'bg-gradient-to-r from-cyan-500 to-blue-500'
+                    : theme.progressBarGradient
                 }`}
                 style={{ width: `${progressPercentage}%` }}
               />
@@ -190,7 +221,7 @@ export default function App() {
               <div className="h-8 w-px bg-slate-800" />
 
               <div className="flex items-center gap-2">
-                <Award className="w-5 h-5 text-cyan-400" />
+                <Award className={`w-5 h-5 ${theme.textAccent} transition-colors duration-200`} />
                 <div className="text-left">
                   <span className="text-xs text-slate-400 block font-medium">Histórico total</span>
                   <span className="text-base font-black text-white font-mono">
@@ -206,7 +237,7 @@ export default function App() {
               className={`w-full py-4 px-6 rounded-2xl font-extrabold text-base transition-all duration-200 flex items-center justify-center gap-2.5 shadow-xl active:scale-[0.98] ${
                 progressPercentage === 100
                   ? 'bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-400 text-slate-950 shadow-emerald-500/25 ring-2 ring-emerald-400/50'
-                  : 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 shadow-cyan-500/20'
+                  : theme.btnPrimaryGradient
               }`}
             >
               {progressPercentage === 100 ? (

@@ -1,5 +1,6 @@
 import { Trophy, Flame, Calendar, ArrowRight } from 'lucide-react'
 import type { WorkoutDay, Profile } from '../types/workout'
+import { useTheme } from '../context/useTheme'
 
 interface WorkoutSummaryModalProps {
   isOpen: boolean
@@ -16,6 +17,7 @@ export const WorkoutSummaryModal: React.FC<WorkoutSummaryModalProps> = ({
   workoutDay,
   stats,
 }) => {
+  const theme = useTheme()
   if (!isOpen) return null
 
   return (
@@ -26,11 +28,17 @@ export const WorkoutSummaryModal: React.FC<WorkoutSummaryModalProps> = ({
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-sm rounded-3xl bg-slate-900 border border-emerald-500/30 p-6 shadow-2xl text-center space-y-5 animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-sm rounded-3xl bg-slate-900 border border-slate-800 p-6 shadow-2xl text-center space-y-5 animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Big Trophy Icon */}
-        <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 to-cyan-500 mx-auto flex items-center justify-center text-slate-950 shadow-lg shadow-emerald-500/25">
+        <div
+          className={`w-16 h-16 rounded-2xl mx-auto flex items-center justify-center text-slate-950 shadow-lg ${
+            theme.isRose
+              ? 'bg-gradient-to-tr from-emerald-500 to-rose-500 shadow-rose-500/25'
+              : 'bg-gradient-to-tr from-emerald-500 to-cyan-500 shadow-emerald-500/25'
+          }`}
+        >
           <Trophy className="w-8 h-8 stroke-[2.2]" />
         </div>
 
@@ -60,10 +68,10 @@ export const WorkoutSummaryModal: React.FC<WorkoutSummaryModalProps> = ({
 
           <div className="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800">
             <div className="flex items-center justify-center gap-1.5 text-xs text-slate-400 font-medium mb-1">
-              <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+              <Calendar className={`w-3.5 h-3.5 ${theme.textAccent}`} />
               <span>Total Histórico</span>
             </div>
-            <div className="text-2xl font-black text-cyan-400 font-mono">
+            <div className={`text-2xl font-black ${theme.textAccent} font-mono transition-colors duration-200`}>
               {stats.total}x
             </div>
           </div>
@@ -71,7 +79,11 @@ export const WorkoutSummaryModal: React.FC<WorkoutSummaryModalProps> = ({
 
         <button
           onClick={onClose}
-          className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-bold shadow-lg shadow-emerald-500/20 active:scale-95 transition-all text-sm flex items-center justify-center gap-2"
+          className={`w-full py-3.5 px-4 rounded-xl ${
+            theme.isRose
+              ? 'bg-gradient-to-r from-emerald-500 to-rose-500 hover:from-emerald-400 hover:to-rose-400'
+              : 'bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400'
+          } text-slate-950 font-bold shadow-lg shadow-emerald-500/20 active:scale-95 transition-all text-sm flex items-center justify-center gap-2`}
         >
           <span>Concluir e Continuar</span>
           <ArrowRight className="w-4 h-4" />

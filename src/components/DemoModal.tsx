@@ -1,5 +1,6 @@
 import { ExternalLink, X, Play, Info } from 'lucide-react'
 import type { Exercise } from '../types/workout'
+import { useTheme } from '../context/useTheme'
 
 interface DemoModalProps {
   exercise: Exercise | null
@@ -7,6 +8,7 @@ interface DemoModalProps {
 }
 
 export const DemoModal: React.FC<DemoModalProps> = ({ exercise, onClose }) => {
+  const theme = useTheme()
   if (!exercise) return null
 
   const youtubeUrl = `https://www.youtube.com/results?search_query=${exercise.demoSearchQuery}`
@@ -25,7 +27,9 @@ export const DemoModal: React.FC<DemoModalProps> = ({ exercise, onClose }) => {
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mb-2">
+            <span
+              className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold ${theme.badge} mb-2 transition-colors duration-200`}
+            >
               Demonstração do Exercício
             </span>
             <h3 className="text-xl font-bold text-white tracking-tight">
@@ -60,7 +64,9 @@ export const DemoModal: React.FC<DemoModalProps> = ({ exercise, onClose }) => {
           </div>
           <div className="rounded-xl bg-slate-800/50 p-3 border border-slate-700/50">
             <span className="text-xs text-slate-400 block mb-1">Alvo de Repetições</span>
-            <span className="text-base font-bold text-cyan-400">{exercise.targetReps}</span>
+            <span className={`text-base font-bold ${theme.textAccent} transition-colors duration-200`}>
+              {exercise.targetReps}
+            </span>
           </div>
         </div>
 
@@ -70,7 +76,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({ exercise, onClose }) => {
             href={youtubeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold shadow-lg shadow-cyan-500/20 active:scale-[0.98] transition-all text-sm"
+            className={`flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl ${theme.btnPrimaryGradient} text-white font-semibold active:scale-[0.98] transition-all text-sm`}
           >
             <Play className="w-4 h-4 fill-white" />
             <span>Assistir GIF / Vídeo de Execução</span>

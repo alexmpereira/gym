@@ -41,13 +41,14 @@ export const profiles: Profile[] = [
           },
           {
             id: 'p1-a2',
-            name: 'Voador (Peck Deck na Estação)',
+            name: 'Crucifixo com Halteres (Reto ou Inclinado)',
             setsText: '4 x 10-12',
             totalSets: parseTotalSets('4 x 10-12'),
             targetReps: '10 a 12 reps',
-            observation: 'Aperte o peitoral no pico de contração.',
-            demoBadgeText: 'Peck Deck',
-            demoSearchQuery: 'gif+peck+deck+machine',
+            observation:
+              'Manter os cotovelos levemente flexionados durante todo o arco do movimento e focar no alongamento do peitoral.',
+            demoBadgeText: 'Crucifixo Halteres',
+            demoSearchQuery: 'gif+crucifixo+com+halteres',
           },
           {
             id: 'p1-a3',

@@ -1,6 +1,7 @@
 import { useState, type ChangeEvent } from 'react'
 import { Check, Video, ChevronDown, ChevronUp, Sparkles, Timer } from 'lucide-react'
 import type { Exercise, ExerciseProgress } from '../types/workout'
+import { useTheme } from '../context/useTheme'
 
 interface ExerciseCardProps {
   exercise: Exercise
@@ -23,6 +24,8 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
   onStartTimer,
   recommendedRestSeconds,
 }) => {
+  const theme = useTheme()
+
   const [isExpanded, setIsExpanded] = useState(false)
   const completedSets = progress?.completedSets ?? []
   const currentLoad = progress?.loadKg ?? ''
@@ -75,7 +78,9 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
                 )}
               </div>
               <div className="flex items-center gap-2 mt-1 text-xs text-slate-400 font-medium">
-                <span className="text-cyan-400 font-bold">{exercise.setsText}</span>
+                <span className={`${theme.textAccent} font-bold transition-colors duration-200`}>
+                  {exercise.setsText}
+                </span>
                 <span>•</span>
                 <span>{exercise.targetReps}</span>
               </div>
@@ -86,7 +91,7 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
           <div className="flex items-center gap-1.5 shrink-0">
             <button
               onClick={() => onOpenDemo(exercise)}
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700/80 text-cyan-400 hover:text-cyan-300 text-xs font-medium transition-colors border border-slate-700/60"
+              className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700/80 ${theme.textAccent} ${theme.textAccentHover} text-xs font-medium transition-colors border border-slate-700/60`}
               title="Ver demonstração em GIF"
             >
               <Video className="w-3.5 h-3.5" />
@@ -142,7 +147,9 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
           {/* Quick Carga & Rest trigger */}
           <div className="flex items-center gap-2 self-start sm:self-end">
             {/* Weight Input */}
-            <div className="flex items-center bg-slate-950/60 border border-slate-800 rounded-xl px-2.5 py-1.5 focus-within:border-cyan-500 transition-colors">
+            <div
+              className={`flex items-center bg-slate-950/60 border border-slate-800 rounded-xl px-2.5 py-1.5 ${theme.focusWithinBorder} transition-colors`}
+            >
               <input
                 type="number"
                 step="0.5"
@@ -157,10 +164,10 @@ export const ExerciseCard: React.FC<ExerciseCardProps> = ({
             {/* Quick Timer Button */}
             <button
               onClick={() => onStartTimer(recommendedRestSeconds)}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-800 hover:bg-cyan-500/10 hover:border-cyan-500/30 hover:text-cyan-400 text-slate-300 border border-slate-700/50 text-xs font-medium transition-colors"
+              className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-800 ${theme.quickTimerHover} text-slate-300 border border-slate-700/50 text-xs font-medium transition-colors`}
               title={`Iniciar descanso de ${recommendedRestSeconds}s`}
             >
-              <Timer className="w-3.5 h-3.5 text-cyan-400" />
+              <Timer className={`w-3.5 h-3.5 ${theme.textAccent}`} />
               <span>{recommendedRestSeconds}s</span>
             </button>
           </div>

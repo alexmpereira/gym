@@ -22,6 +22,13 @@ describe('workouts data integrity', () => {
         expect(ex.observation.length).toBeGreaterThan(0)
       }
     }
+
+    const diaA = p1.days.find((d) => d.letter === 'A')!
+    const ex2 = diaA.exercises.find((e) => e.id === 'p1-a2')!
+    expect(ex2.name).toBe('Crucifixo com Halteres (Reto ou Inclinado)')
+    expect(ex2.setsText).toBe('4 x 10-12')
+    expect(ex2.totalSets).toBe(4)
+    expect(ex2.demoSearchQuery).toBe('gif+crucifixo+com+halteres')
   })
 
   it('Perfil 2 has 3 days (Dia A, Dia B, Dia C) with 5 exercises each', () => {

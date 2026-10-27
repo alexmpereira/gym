@@ -1,6 +1,7 @@
 import { X, Calendar, Trash2, Award } from 'lucide-react'
 import type { WorkoutLog, UserProfileId } from '../types/workout'
 import { profiles } from '../data/workouts'
+import { useTheme } from '../context/useTheme'
 
 interface HistoryModalProps {
   isOpen: boolean
@@ -17,6 +18,7 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
   activeProfileId,
   onDeleteLog,
 }) => {
+  const theme = useTheme()
   if (!isOpen) return null
 
   const profile = profiles.find((p) => p.id === activeProfileId) ?? profiles[0]
@@ -99,7 +101,9 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
                   className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800/80 hover:border-slate-700 transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="flex items-center justify-center w-8 h-8 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 text-xs font-bold shrink-0">
+                    <span
+                      className={`flex items-center justify-center w-8 h-8 rounded-xl ${theme.badge} text-xs font-bold shrink-0 transition-colors duration-200`}
+                    >
                       {dayInfo.letter}
                     </span>
                     <div>

@@ -1,5 +1,6 @@
 import { X, Layers, Check } from 'lucide-react'
 import { equipmentList } from '../data/workouts'
+import { useTheme } from '../context/useTheme'
 
 interface EquipmentModalProps {
   isOpen: boolean
@@ -10,6 +11,7 @@ export const EquipmentModal: React.FC<EquipmentModalProps> = ({
   isOpen,
   onClose,
 }) => {
+  const theme = useTheme()
   if (!isOpen) return null
 
   return (
@@ -25,7 +27,7 @@ export const EquipmentModal: React.FC<EquipmentModalProps> = ({
       >
         <div className="flex items-center justify-between pb-2 border-b border-slate-800">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400">
+            <div className={`p-2 rounded-xl ${theme.badge} transition-colors duration-200`}>
               <Layers className="w-5 h-5" />
             </div>
             <div>
